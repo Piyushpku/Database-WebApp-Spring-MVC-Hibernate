@@ -25,7 +25,7 @@ public class CustomerDaoImp implements CustomerDao {
 	public List<Customer> getcustomers() {
 		Session s= sessionFactory.getCurrentSession();
 		
-		Query<Customer> theQuery=s.createQuery("from Customer", Customer.class);
+		Query<Customer> theQuery=s.createQuery("from Customer order by last", Customer.class);
 		List<Customer> c=theQuery.getResultList();
 		return c;
 	}
@@ -58,6 +58,16 @@ public class CustomerDaoImp implements CustomerDao {
 		Session s= sessionFactory.getCurrentSession();
 		Customer c=s.get(Customer.class,id);
 		return c;
+	}
+
+	@Override
+	public void deleteCustomer(int id) {
+		// TODO Auto-generated method stub
+		Session s= sessionFactory.getCurrentSession();
+		Query theQuery=s.createQuery("delete from Customer where id=:customerId");
+		theQuery.setParameter("customerId", id);
+		theQuery.executeUpdate();
+		
 	}
 
 }
