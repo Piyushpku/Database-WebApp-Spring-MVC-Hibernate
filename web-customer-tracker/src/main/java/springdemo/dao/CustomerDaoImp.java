@@ -70,4 +70,19 @@ public class CustomerDaoImp implements CustomerDao {
 		
 	}
 
+	@Override
+	public List<Customer> searchCustomers(String name) {
+		// TODO Auto-generated method stub
+		Query theQuery=null;
+		Session s= sessionFactory.getCurrentSession();
+		if(name!=null && name.trim().length()!=0) {
+			theQuery=s.createQuery("from Customer where lower(first) like :name or lower(last) like:name", Customer.class);
+			theQuery.setParameter("name","%"+name+"%");
+		}else {
+			theQuery=s.createQuery("from Customer", Customer.class);
+		}
+		List<Customer> res=theQuery.getResultList();
+		return res;
+	}
+
 }
