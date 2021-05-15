@@ -6,4 +6,6 @@ import springdemo.entity.Customer;
 public interface CustomerDao {
 
 	public List<Customer> getcustomers();
+
+	public void saveCustomer(Customer theCustomer);
 }
