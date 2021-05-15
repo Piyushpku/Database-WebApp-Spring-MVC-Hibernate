@@ -45,6 +45,8 @@ public class CustomerDaoImp implements CustomerDao {
 		s.save(theCustomer);
 		s.getTransaction().commit();
 		factory.close();*/
+		
+		
 		Session s= sessionFactory.getCurrentSession();
 		s.saveOrUpdate(theCustomer);
 		
