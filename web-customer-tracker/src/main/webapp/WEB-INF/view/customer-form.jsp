@@ -31,25 +31,27 @@
 		<h3>Save Customer</h3>
 		<form:form action="saveCustomer" modelAttribute="customer" method="POST">
 		
+		<form:hidden path="id" />
+		
 		<table>
 			<tbody>
 				<tr>
-					<td><label>First Name:</td>
+					<td><label>First Name:</label></td>
 					<td><form:input path="first"/></td>
 				</tr>
 				
 				<tr>
-					<td><label>Last Name:</td>
+					<td><label>Last Name:</label></td>
 					<td><form:input path="last"/></td>
 				</tr>
 				
 				<tr>
-					<td><label>Email Id:</td>
+					<td><label>Email Id:</label></td>
 					<td><form:input path="email"/></td>
 				</tr>
 				
 				<tr>
-					<td><label></td>
+					<td><label></label></td>
 					<td><input type="submit" value="Save" class=save></td>
 				</tr>
 			
