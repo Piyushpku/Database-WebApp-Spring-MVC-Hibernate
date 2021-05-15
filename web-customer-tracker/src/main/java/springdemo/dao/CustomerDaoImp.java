@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import springdemo.CustomerController;
 import springdemo.entity.Customer;
 import springdemo.service.CustomerServiceImpl;
+import util.SortUtils;
 
 @Repository
 public class CustomerDaoImp implements CustomerDao {
@@ -22,10 +23,22 @@ public class CustomerDaoImp implements CustomerDao {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<Customer> getcustomers() {
+	public List<Customer> getcustomers(int sort) {
 		Session s= sessionFactory.getCurrentSession();
-		
-		Query<Customer> theQuery=s.createQuery("from Customer order by last", Customer.class);
+		String sortField="";
+		switch(sort) {
+			case SortUtils.FIRST_NAME:
+				sortField="first";
+				break;
+			case SortUtils.LAST_NAME:
+				sortField="last";
+				break;
+			case SortUtils.EMAIL:
+				sortField="email";
+				break;
+				
+		}
+		Query<Customer> theQuery=s.createQuery("from Customer order by "+sortField, Customer.class);
 		List<Customer> c=theQuery.getResultList();
 		return c;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import springdemo.dao.*;
 import springdemo.entity.Customer;
 import springdemo.service.CustomerService;
+import util.SortUtils;
 
 @Controller
 @RequestMapping("/customer")
@@ -23,8 +24,13 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@RequestMapping("/list")
-	public String listCustomers(Model theModel) {
-		List<Customer> c=customerService.getCustomers();
+	public String listCustomers(Model theModel,@RequestParam(required=false) String sort) {
+		int s=2;
+		if(sort!=null)
+			s=Integer.parseInt(sort);
+		else
+			s=SortUtils.LAST_NAME;
+		List<Customer> c=customerService.getCustomers(s);
 		
 		theModel.addAttribute("customers",c);
 		return "list-customers";
